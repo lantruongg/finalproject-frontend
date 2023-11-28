@@ -10,6 +10,7 @@ import Cart from "./components/cart/Cart";
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Admin from "./components/admin/Admin";
 
 function App() {
   return (
@@ -22,8 +23,9 @@ function App() {
         <Route path="/" element={<Maincomp />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/register" element={<SignUp />} />
-        <Route path="/getproductsone/:id" element={<Cart />} />
+        <Route path="/product/:id" element={<Cart />} />
         <Route path="/buynow" element={<Buynow />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
       <Footer />
     </>
