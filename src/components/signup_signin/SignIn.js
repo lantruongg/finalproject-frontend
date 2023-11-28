@@ -1,58 +1,91 @@
-import React, {useState} from 'react'
-import "./signup.css"
-import { NavLink } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import "./signup.css";
+import { NavLink, useNavigate } from "react-router-dom";
+import { loginUser } from "../../api";
+import { toast } from "react-toastify";
+import { getError } from "../../utils";
+import { Button } from "@mui/material";
+import { Store } from "../../Store";
 
 const SignIn = () => {
+  const { dispatch: ctxDispatch } = useContext(Store);
+  const navigate = useNavigate();
 
-    const [logdata,setData] = useState({
-        email: "",
-        password: ""
+  const [logdata, setData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const adddata = (e) => {
+    const { name, value } = e.target;
+
+    setData(() => {
+      return {
+        ...logdata,
+        [name]: value,
+      };
     });
-    console.log(logdata);
+  };
+  const login = async () => {
+    try {
+      const result = await loginUser(logdata);
 
-    const adddata = (e) => {
-        const {name,value} = e.target;
+      if (result.data) {
+        ctxDispatch({ type: "USER_LOGIN", payload: result.data });
+        localStorage.setItem("token", result.data.token);
+        navigate("/");
+      }
 
-        setData(()=>{
-            return {
-                ...logdata,
-                [name]: value
-            }
-        })
+      toast.success("User login successfully");
+    } catch (err) {
+      toast.error(getError(err));
     }
-    return (
-        <section>
-            <div className="sign_container">
-                <div className="sign_header">
-                    <img src="./blacklogoamazon.png" alt="signupimg" />
-                </div>
-                <div className="sign_form">
-                    <form>
-                        <h1>Sign-In</h1>
-                        <div className="form_data">
-                            <label htmlFor="email">Email</label>
-                            <input type="text"
-                            onChangge={adddata}
-                            value={logdata.email}
-                            name="email" id="email"/>
-                        </div>
-                        <div className="form_data">
-                            <label htmlFor="password">Password</label>
-                            <input type="password"
-                            onChange={adddata}
-                            value={logdata.password}
-                            name="password" placeholder='at least 6 char' id="password"/>
-                        </div>
-                        <button className='signin_btn'>Continue</button>
-                    </form>
-                </div>
-                <div className="create_accountinfo">
-                    <p>New to Amazon</p>
-                    <button>  <NavLink to="/register">Create your Amazon Account</NavLink></button>
-                </div>
+  };
+  return (
+    <section>
+      <div className="sign_container">
+        <div className="sign_header">
+          <img src="./blacklogoamazon.png" alt="signupimg" />
+        </div>
+        <div className="sign_form">
+          <form>
+            <h1>Sign-In</h1>
+            <div className="form_data">
+              <label htmlFor="email">Email</label>
+              <input
+                type="text"
+                onChange={adddata}
+                value={logdata.email}
+                name="email"
+                id="email"
+              />
             </div>
-        </section>
-    )
-}
+            <div className="form_data">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                onChange={adddata}
+                value={logdata.password}
+                name="password"
+                placeholder="at least 6 char"
+                id="password"
+              />
+            </div>
+            <Button className="signin_btn" onClick={() => login()}>
+              Continue
+            </Button>
+          </form>
+        </div>
+        <div className="create_accountinfo">
+          <p>New to Amazon</p>
+          <button>
+            {" "}
+            <NavLink to="/register">Create your Amazon Account</NavLink>
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
 
-export default SignIn
+export default SignIn;
