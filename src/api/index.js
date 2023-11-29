@@ -36,3 +36,17 @@ export const searchProducts = (keyword) =>
       keyword,
     },
   });
+export const createOrderPaypal = (cost) =>
+  axiosInstance.post("/paypal/create-paypal-order", {
+    cost,
+  });
+export const approvePaypal = (data) =>
+  axiosInstance.post("/paypal/capture-paypal-order", {
+    orderID: data?.orderID,
+  });
+export const createOrderProduct = (cart, address, totalPrice, userID) =>
+  axiosInstance.post("/orders/create", { cart, address, totalPrice, userID });
+export const getOrders = () => axiosInstance.get("/orders/");
+export const getOrderDetails = (id) =>
+  axiosInstance.post("/orders/details", { id });
+export const payOrder = (id) => axiosInstance.put(`/orders/${id}/pay`);

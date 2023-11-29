@@ -5,12 +5,21 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { StoreProvider } from "./Store";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
+const initialOptions = {
+  "client-id":
+    "AeMWld4f-4Y_oJkNMByG_QDGB50aCNeF8kEjuQotsGPDChbBMdJe-B_kAnPHSnQN1GKnfbFOU1BVd39a",
+  currency: "USD",
+  intent: "capture",
+};
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <StoreProvider>
     <BrowserRouter>
-      <App />
+      <PayPalScriptProvider options={initialOptions}>
+        <App />
+      </PayPalScriptProvider>
     </BrowserRouter>
   </StoreProvider>
 );

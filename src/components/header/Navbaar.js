@@ -16,6 +16,7 @@ const Navbaar = () => {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const [keyword, setKeyword] = useState("");
+  const [user, setUser] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [products, setProducts] = useState([]);
 
@@ -65,11 +66,12 @@ const Navbaar = () => {
   }, []);
   useEffect(() => {
     const getUser = async () => {
-      const userID = state?.token?._id;
+      const userID = jwtDecode(state?.token)?._id;
       if (userID) {
+        console.log(userID);
         try {
           const result = await getUserByID(userID);
-          ctxDispatch({ type: "SET_DATA", payload: result.data });
+          setUser(result.data);
         } catch (err) {
           toast.error(getError(err));
         }
@@ -77,7 +79,6 @@ const Navbaar = () => {
     };
     getUser();
   }, [state?.token, ctxDispatch]);
-  const user = state.data;
   return (
     <header>
       <nav>
@@ -85,7 +86,7 @@ const Navbaar = () => {
           <div className="navlogo">
             <NavLink to="/">
               {" "}
-              <img src="./amazon_PNG25.png" alt="logo" />{" "}
+              <img src="/amazon_PNG25.png" alt="logo" />
             </NavLink>
           </div>
           <div className="nav_searchbaar">
@@ -126,8 +127,8 @@ const Navbaar = () => {
               <NavLink to="/login">Sign in</NavLink>
             </div>
           )}
-          <div className="cart_btn">
-            <Badge badgeContent={4} color="primary">
+          <div className="cart_btn" onClick={() => navigate("/cart")}>
+            <Badge badgeContent={state.cart.length} color="primary">
               <ShoppingCartIcon id="icon" />
             </Badge>
             <p>Cart</p>
@@ -143,6 +144,7 @@ const Navbaar = () => {
             >
               <div>
                 <img
+                  onClick={() => navigate("/history-order")}
                   style={{
                     marginRight: 10,
                     width: 30,
