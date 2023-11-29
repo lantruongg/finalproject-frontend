@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { getOrders } from "../../api";
+import React, { useContext, useEffect, useState } from "react";
+import { getMyOrder } from "../../api";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { Store } from "../../Store";
 
 export default function MyOrder() {
+  const { state } = useContext(Store);
   const [orders, setOrders] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     const getAllOrders = async () => {
-      const result = await getOrders();
+      const userID = jwtDecode(state?.token)?._id;
+      const result = await getMyOrder(userID);
+      console.log(result.data);
       setOrders(result.data);
     };
     getAllOrders();
-  }, []);
+  }, [state]);
   return (
     <table className="table" style={{ marginTop: 100 }}>
       <thead>
@@ -26,7 +31,7 @@ export default function MyOrder() {
         </tr>
       </thead>
       <tbody>
-        {orders.map((order) => (
+        {orders?.map((order) => (
           <tr key={order._id}>
             <td>{order._id}</td>
             <td>{order.createdAt.substring(0, 10)}</td>

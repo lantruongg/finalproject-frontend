@@ -68,7 +68,6 @@ const Navbaar = () => {
     const getUser = async () => {
       const userID = jwtDecode(state?.token)?._id;
       if (userID) {
-        console.log(userID);
         try {
           const result = await getUserByID(userID);
           setUser(result.data);
