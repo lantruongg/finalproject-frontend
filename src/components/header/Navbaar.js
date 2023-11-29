@@ -66,13 +66,16 @@ const Navbaar = () => {
   }, []);
   useEffect(() => {
     const getUser = async () => {
-      const userID = jwtDecode(state?.token)?._id;
-      if (userID) {
-        try {
-          const result = await getUserByID(userID);
-          setUser(result.data);
-        } catch (err) {
-          toast.error(getError(err));
+      const token = localStorage.getItem("token");
+      if (token) {
+        const userID = jwtDecode(token)?._id;
+        if (userID) {
+          try {
+            const result = await getUserByID(userID);
+            setUser(result.data);
+          } catch (err) {
+            toast.error(getError(err));
+          }
         }
       }
     };

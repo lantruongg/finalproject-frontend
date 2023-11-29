@@ -15,9 +15,11 @@ export default function ShippingAddress() {
   const [address, setAddress] = useState(shippingAddress.address || "");
   const [city, setCity] = useState(shippingAddress.city || "");
   const [email, setEmail] = useState(shippingAddress.email || "");
-  const userID = jwtDecode(state?.token)?._id;
   const submitHandler = async () => {
     if (fullName && address && city && email) {
+      const token = localStorage.getItem("token");
+      const userID = jwtDecode(token)?._id;
+
       const products = state?.cart;
       const totalPrice = products.reduce((total, product) => {
         return total + parseFloat(product.price) * product.quantity; // Multiply by quantity

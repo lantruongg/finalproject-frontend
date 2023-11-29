@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 const Cart = () => {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
-  const products = state.cart;
+  const products = state?.cart;
   const totalPrice = products.reduce((total, product) => {
     return total + parseFloat(product.price) * product.quantity; // Multiply by quantity
   }, 0);
@@ -30,15 +30,12 @@ const Cart = () => {
           <Divider />
           {products?.length > 0 &&
             products.map((product) => (
-              <div
-                className="item_containert"
-                style={{ cursor: "pointer" }}
-                onClick={() => navigate(`/product/${product._id}`)}
-              >
+              <div className="item_containert" style={{ cursor: "pointer" }}>
                 <img
                   src={product.photos}
                   style={{ width: 200, height: 250 }}
                   alt="cart_img"
+                  onClick={() => navigate(`/product/${product._id}`)}
                 />
                 <div className="item_details">
                   <h3>{product.title}</h3>
