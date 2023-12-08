@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { getError } from "../../utils";
 import { getUserByID, searchProducts } from "../../api";
 import { Button } from "@mui/material";
+import { Dropdown } from "antd";
 
 const Navbaar = () => {
   const navigate = useNavigate();
@@ -81,6 +82,24 @@ const Navbaar = () => {
     };
     getUser();
   }, [state?.token, ctxDispatch]);
+
+  const items = [
+    {
+      key: "1",
+      label: <div onClick={() => navigate("/profile")}>Profile</div>,
+    },
+    {
+      key: "2",
+      label: (
+        <div onClick={() => navigate("/history-order")}>Order History</div>
+      ),
+    },
+    user.role === "Admin" && {
+      key: "3",
+      label: <div onClick={() => navigate("/admin")}>Admin</div>,
+    },
+  ];
+
   return (
     <header>
       <nav>
@@ -136,30 +155,39 @@ const Navbaar = () => {
             <p>Cart</p>
           </div>
           {user && (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                color: "white",
-                fontSize: 22,
+            <Dropdown
+              menu={{
+                items,
+              }}
+              placement="bottom"
+              arrow={{
+                pointAtCenter: true,
               }}
             >
-              <div>
-                <img
-                  onClick={() => navigate("/history-order")}
-                  style={{
-                    marginRight: 10,
-                    width: 30,
-                    height: 30,
-                    borderRadius: "50%",
-                  }}
-                  src={user.avatar}
-                  alt={user.fullName}
-                />
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  color: "white",
+                  fontSize: 22,
+                }}
+              >
+                <div>
+                  <img
+                    style={{
+                      marginRight: 10,
+                      width: 30,
+                      height: 30,
+                      borderRadius: "50%",
+                    }}
+                    src={user.avatar}
+                    alt={user.fullName}
+                  />
+                </div>
+                <div>{user.fullName}</div>
+                <Button onClick={() => logoutHandler()}>Logout</Button>
               </div>
-              <div>{user.fullName}</div>
-              <Button onClick={() => logoutHandler()}>Logout</Button>
-            </div>
+            </Dropdown>
           )}
         </div>
       </nav>

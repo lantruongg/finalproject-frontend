@@ -4,6 +4,7 @@ import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { Store } from "../../Store";
+import { Helmet } from "react-helmet-async";
 
 export default function MyOrder() {
   const { state } = useContext(Store);
@@ -20,6 +21,9 @@ export default function MyOrder() {
   }, [state]);
   return (
     <table className="table" style={{ marginTop: 100 }}>
+      <Helmet>
+        <title>Order History</title>
+      </Helmet>
       <thead>
         <tr>
           <th>ID</th>

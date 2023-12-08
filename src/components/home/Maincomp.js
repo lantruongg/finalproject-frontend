@@ -2,10 +2,14 @@ import React, { useContext } from "react";
 import Banner from "./Banner";
 import "./home.css";
 import Slide from "./Slide";
+import { Helmet } from "react-helmet-async";
 
 const Maincomp = () => {
   return (
     <div className="home_section">
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <div className="banner_part">
         <Banner />
       </div>

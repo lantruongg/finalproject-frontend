@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { approvePaypal, createOrderPaypal } from "../../api";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, ListGroup, Row, Col } from "react-bootstrap";
+import { Helmet } from "react-helmet-async";
 
 export default function Order() {
   const [order, setOrder] = useState("");
@@ -52,6 +53,9 @@ export default function Order() {
   };
   return (
     <div>
+      <Helmet>
+        <title>Order Details</title>
+      </Helmet>
       <h1 className="my-3">Order {order._id}</h1>
       <Row>
         <Col md={8}>

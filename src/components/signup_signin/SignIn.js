@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { getError } from "../../utils";
 import { Button } from "@mui/material";
 import { Store } from "../../Store";
+import { Helmet } from "react-helmet-async";
 
 const SignIn = () => {
   const { dispatch: ctxDispatch } = useContext(Store);
@@ -43,6 +44,9 @@ const SignIn = () => {
   };
   return (
     <section>
+      <Helmet>
+        <title>Sign In</title>
+      </Helmet>
       <div className="sign_container">
         <div className="sign_header">
           <img src="./blacklogoamazon.png" alt="signupimg" />

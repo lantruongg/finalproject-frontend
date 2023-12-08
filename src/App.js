@@ -15,8 +15,28 @@ import Cart from "./components/cart/Cart.js";
 import ShippingAddress from "./components/shipping/ShippingAddress.js";
 import Order from "./components/order/Order.js";
 import MyOrder from "./components/MyOrders/MyOrder.js";
+import { useContext, useEffect, useState } from "react";
+import { Store } from "./Store.js";
+import { jwtDecode } from "jwt-decode";
+import { getUserByID } from "./api/index.js";
+import Profile from "./components/profile/profile.js";
 
 function App() {
+  const { state } = useContext(Store);
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    const getUser = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const userID = jwtDecode(token)?._id;
+        if (userID) {
+          const result = await getUserByID(userID);
+          setUser(result.data);
+        }
+      }
+    };
+    getUser();
+  }, [state?.token]);
   return (
     <>
       <Navbaar />
@@ -29,10 +49,11 @@ function App() {
         <Route path="/register" element={<SignUp />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/admin" element={<Admin />} />
+        {user.role !== "Admin" && <Route path="/admin" element={<Admin />} />}
         <Route path="/chart" element={<Chart />} />
         <Route path="/order/:id" element={<Order />} />
         <Route path="/history-order/" element={<MyOrder />} />
+        <Route path="/profile/" element={<Profile />} />
       </Routes>
       <Footer />
     </>

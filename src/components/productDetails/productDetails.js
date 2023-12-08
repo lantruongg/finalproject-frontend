@@ -4,6 +4,7 @@ import "./productDetails.css";
 import { getProductByID } from "../../api";
 import { useParams } from "react-router-dom";
 import { Store } from "../../Store";
+import { Helmet } from "react-helmet-async";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState("");
@@ -37,6 +38,9 @@ const ProductDetails = () => {
 
   return (
     <div className="cart_section">
+      <Helmet>
+        <title>Product {`${product.title}`}</title>
+      </Helmet>
       <div className="cart_container">
         <div className="left_cart">
           <img

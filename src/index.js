@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { StoreProvider } from "./Store";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { HelmetProvider } from "react-helmet-async";
 
 const initialOptions = {
   "client-id":
@@ -17,9 +18,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <StoreProvider>
     <BrowserRouter>
-      <PayPalScriptProvider options={initialOptions}>
-        <App />
-      </PayPalScriptProvider>
+      <HelmetProvider>
+        <PayPalScriptProvider options={initialOptions}>
+          <App />
+        </PayPalScriptProvider>
+      </HelmetProvider>
     </BrowserRouter>
   </StoreProvider>
 );

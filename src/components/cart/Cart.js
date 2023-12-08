@@ -6,6 +6,7 @@ import { Button } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 const Cart = () => {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -21,6 +22,9 @@ const Cart = () => {
 
   return (
     <div className="buynow_section">
+      <Helmet>
+        <title>Cart</title>
+      </Helmet>
       <div className="buynow_container">
         <div className="left_buy">
           <h1>Shopping cart</h1>

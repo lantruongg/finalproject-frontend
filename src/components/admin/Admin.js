@@ -19,32 +19,104 @@ import {
   deleteProduct,
   getCategory,
   getProducts,
+  getUsers,
 } from "../../api";
 import { Grid } from "@mui/material";
 import TextArea from "antd/es/input/TextArea";
 import Chart from "../chart/chart.js";
+import { Helmet } from "react-helmet-async";
 const { Option } = Select;
 export default function Admin() {
   const items = [
     {
       key: "1",
+      label: "User",
+      children: <TableUser />,
+    },
+    {
+      key: "2",
       label: "Category",
       children: <TableCategory />,
     },
     {
-      key: "2",
+      key: "3",
       label: "Product",
       children: <TableProduct />,
     },
     {
-      key: "3",
+      key: "4",
       label: "Chart",
       children: <Chart />,
     },
   ];
 
-  return <Tabs style={{ marginTop: 75 }} defaultActiveKey="1" items={items} />;
+  return (
+    <div>
+      <Helmet>
+        <title>Admin</title>
+      </Helmet>
+      <Tabs
+        style={{ marginTop: 75, marginLeft: 25 }}
+        defaultActiveKey="1"
+        items={items}
+      />
+    </div>
+  );
 }
+export const TableUser = () => {
+  const [user, setUser] = useState("");
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    const fetchAllUsers = async () => {
+      try {
+        const result = await getUsers();
+        setUsers(result.data);
+      } catch (err) {
+        toast.error(getError(err));
+      }
+    };
+    fetchAllUsers();
+  }, []);
+
+  const dataUsers = users?.map((user) => ({
+    key: user?._id,
+    name: user?.fullName,
+    email: user?.email,
+    role: user?.role,
+  }));
+  console.log(users);
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      width: "40%",
+      render: (text) => text,
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      width: "30%",
+      render: (text) => text,
+    },
+    {
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
+      width: "30%",
+      render: (text) => text,
+    },
+  ];
+
+  return (
+    <div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Table columns={columns} dataSource={dataUsers} />
+      </div>
+    </div>
+  );
+};
 export const TableCategory = () => {
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);

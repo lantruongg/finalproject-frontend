@@ -16,6 +16,9 @@ export const registerUser = (user) =>
   axiosInstance.post(`${URL}/users/register/`, {
     user,
   });
+export const updateUser = (id, fullName, email, password) =>
+  axiosInstance.put(`${URL}/users/profile`, { id, fullName, email, password });
+export const getUsers = () => axiosInstance.get("/users/");
 export const getUserByID = (id) =>
   axiosInstance.post("/users/getUserByID", { userID: id });
 export const getCategory = () => axiosInstance.get("/category/");

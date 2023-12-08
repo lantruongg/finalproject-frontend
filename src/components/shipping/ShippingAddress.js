@@ -5,6 +5,7 @@ import { Button, Form, Input } from "antd";
 import { toast } from "react-toastify";
 import { createOrderProduct } from "../../api";
 import { jwtDecode } from "jwt-decode";
+import { Helmet } from "react-helmet-async";
 
 export default function ShippingAddress() {
   const navigate = useNavigate();
@@ -59,6 +60,9 @@ export default function ShippingAddress() {
 
   return (
     <div style={{ marginTop: 75 }}>
+      <Helmet>
+        <title>Shipping Address</title>
+      </Helmet>
       <div className="container small-container">
         <h1 className="my-3">Shipping Address</h1>
         <Form
