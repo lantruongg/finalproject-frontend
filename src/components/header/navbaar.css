@@ -91,7 +91,7 @@ header nav .right .cart_btn {
   margin-left: 22px;
   cursor: pointer;
   margin-top: 2px;
-  padding: 8px;
+  padding: 5px;
   border-radius: 2px;
   border: 1px solid #131921;
   align-items: center;
@@ -202,7 +202,7 @@ header nav .nav_searchbaar {
 header nav .search_results {
   position: absolute;
   top: calc(100% - 5px); /* Adjust the spacing between search bar and results */
-  width: 453px;
+  width: 440px;
   background-color: #fff;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
@@ -211,7 +211,7 @@ header nav .search_results {
   padding: 0;
   margin: 0;
 
-  margin-left: 362px;
+  margin-left: 500px;
 }
 
 header nav .search_results li {

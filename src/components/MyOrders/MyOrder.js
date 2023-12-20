@@ -12,7 +12,9 @@ export default function MyOrder() {
   const navigate = useNavigate();
   useEffect(() => {
     const getAllOrders = async () => {
-      const userID = jwtDecode(state?.token)?._id;
+      const token = localStorage.getItem("token");
+
+      const userID = jwtDecode(token)?._id;
       const result = await getMyOrder(userID);
       console.log(result.data);
       setOrders(result.data);
@@ -20,7 +22,7 @@ export default function MyOrder() {
     getAllOrders();
   }, [state]);
   return (
-    <table className="table" style={{ marginTop: 100 }}>
+    <table className="table" style={{ marginTop: 100,marginBottom: 300 }}>
       <Helmet>
         <title>Order History</title>
       </Helmet>

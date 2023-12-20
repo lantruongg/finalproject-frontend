@@ -56,12 +56,13 @@ export default function Admin() {
         <title>Admin</title>
       </Helmet>
       <Tabs
-        style={{ marginTop: 75, marginLeft: 25 }}
+        style={{ marginTop: 75, marginLeft: 25 ,marginBottom: 300}}
         defaultActiveKey="1"
         items={items}
       />
     </div>
   );
+
 }
 export const TableUser = () => {
   const [user, setUser] = useState("");

@@ -88,6 +88,7 @@ section{
     color: #0066c0;
     text-decoration: none;
     font-weight:600;
+    margin-bottom: 15px;
 }
 
 
@@ -97,13 +98,13 @@ section{
     text-align: center;
     color: #767676;
     margin-top: 20px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .create_accountinfo button{
     background: linear-gradient(to bottom,#f7f8fa,#e7e9ec);
     height: 29px;
-    width: 300px;
+    width: 320px;
     border-radius: 3px;
     border: 1px solid #adb1b8;
     outline: none;

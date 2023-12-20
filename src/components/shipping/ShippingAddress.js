@@ -59,8 +59,8 @@ export default function ShippingAddress() {
   };
 
   return (
-    <div style={{ marginTop: 75 }}>
-      <Helmet>
+<div style={{ marginTop: 100,marginBottom: 300 }}>
+<Helmet>
         <title>Shipping Address</title>
       </Helmet>
       <div className="container small-container">

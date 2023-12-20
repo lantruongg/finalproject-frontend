@@ -49,7 +49,7 @@ function App() {
         <Route path="/register" element={<SignUp />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
-        {user.role !== "Admin" && <Route path="/admin" element={<Admin />} />}
+        {user?.role === "Admin" && <Route path="/admin" element={<Admin />} />}
         <Route path="/chart" element={<Chart />} />
         <Route path="/order/:id" element={<Order />} />
         <Route path="/history-order/" element={<MyOrder />} />

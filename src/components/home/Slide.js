@@ -66,7 +66,7 @@ const Slide = ({ title }) => {
             >
               <div className="product_img">
                 <img
-                  style={{ width: 400, height: 300 }}
+                  style={{ width: 300, height: 300 }}
                   src={e.photos}
                   alt="productitem"
                 />

@@ -76,8 +76,8 @@ const Cart = () => {
               </div>
             ))}
 
-          <span className="leftbuyprice">Total Price</span>
-          <span className="leftbuyprice">${totalPrice.toFixed(2)}</span>
+          <span className="leftbuyprice" style={{fontSize: 30}}>Total Price</span>
+          <span className="leftbuyprice" style={{fontSize: 30}}>${totalPrice.toFixed(2)}</span>
           <span className="leftbuyprice" style={{ marginTop: 15 }}>
             <Button onClick={() => navigate("/shipping")} type="primary">
               Continue to shipping address

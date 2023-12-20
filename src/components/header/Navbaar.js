@@ -94,12 +94,11 @@ const Navbaar = () => {
         <div onClick={() => navigate("/history-order")}>Order History</div>
       ),
     },
-    user.role === "Admin" && {
+    user?.role === "Admin" && {
       key: "3",
       label: <div onClick={() => navigate("/admin")}>Admin</div>,
     },
   ];
-
   return (
     <header>
       <nav>

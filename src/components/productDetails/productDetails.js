@@ -59,18 +59,8 @@ const ProductDetails = () => {
           <h4>{product?.title}</h4>
 
           <Divider />
-          <p className="mrp">M.R.P: ${product?.price}</p>
-          <p>
-            Deal of the Day: <span style={{ color: "#B12704" }}> $625</span>
-          </p>
-          <p>
-            You save: <span style={{ color: "#B12704" }}> $570 (47%)</span>
-          </p>
-
-          <div className="discount_box">
-            <h5>
-              Discount :<span style={{ color: "#111" }}>Extra 10% off</span>
-            </h5>
+          <h1 className="mrp">Price: ${product?.price}</h1>
+         <div>
             <h4>
               Free Delivety{" "}
               <span style={{ color: "#111", fontWeight: 600 }}>Oct 8-21</span>{" "}

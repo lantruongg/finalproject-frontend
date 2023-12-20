@@ -81,10 +81,10 @@ const SignIn = () => {
           </form>
         </div>
         <div className="create_accountinfo">
-          <p>New to Amazon</p>
+          <p>New Account</p>
           <button>
             {" "}
-            <NavLink to="/register">Create your Amazon Account</NavLink>
+            <NavLink to="/register">Create your Account</NavLink>
           </button>
         </div>
       </div>
