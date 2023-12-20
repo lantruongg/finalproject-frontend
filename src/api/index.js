@@ -55,3 +55,4 @@ export const getOrderDetails = (id) =>
 export const payOrder = (id) => axiosInstance.put(`/orders/${id}/pay`);
 export const getMyOrder = (id) =>
   axiosInstance.post("/orders/my-order", { id });
+export const getDataChart = () => axiosInstance.get("/orders/chart");

@@ -1,18 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
+import { getDataChart } from "../../api";
 
-export default function chart() {
+export default function Chart() {
+  const [data, setData] = useState([]);
+  const quantitiesData = data.map((entry) => entry.itemCount);
+  const revenueData = data.map((entry) => entry.totalPrice);
+  const dateLabels = data.map((entry) => {
+    const { year, month, day } = entry._id;
+    // Assuming date format is YYYY-MM-DD, adjust as needed
+    return `${new Date(year, month - 1, day).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    })}`;
+  });
+  useEffect(() => {
+    const getData = async () => {
+      const result = await getDataChart();
+      setData(result.data);
+    };
+    getData();
+  }, []);
   const state = {
     series: [
       {
         name: "Quantities",
         type: "area",
-        data: [44, 55, 31, 47, 31, 43, 26, 41, 31, 47, 33],
+        data: quantitiesData,
       },
       {
         name: "Revenue",
         type: "line",
-        data: [556, 693, 863, 616, 732, 246, 671, 924, 441, 612, 543],
+        data: revenueData,
       },
     ],
     options: {
@@ -27,19 +46,7 @@ export default function chart() {
         type: "solid",
         opacity: [0.35, 1],
       },
-      labels: [
-        "Nov 18",
-        "Nov 19",
-        "Nov 20",
-        "Nov 21",
-        "Nov 22",
-        "Nov 23",
-        "Nov 24",
-        "Nov 25",
-        "Nov 26 ",
-        "Nov 27",
-        "Nov 28",
-      ],
+      labels: dateLabels,
       markers: {
         size: 0,
       },
@@ -71,6 +78,7 @@ export default function chart() {
       },
     },
   };
+
   return (
     <ReactApexChart
       style={{ marginTop: 150 }}
